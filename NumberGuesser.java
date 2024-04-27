@@ -1,4 +1,4 @@
-//A Java game where users guess a randomly generated number between 1 and 100 within 5 attempts. Provides feedback on each guess. Users can play multiple rounds.
+//A Java game where users guess a randomly generated number between 1 and 100 within 8 attempts. Provides feedback on each guess. Users can play multiple rounds.
 
 import java.util.Scanner;
 import java.util.Random;
