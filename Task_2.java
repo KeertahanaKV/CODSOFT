@@ -1,3 +1,4 @@
+//This Java program calculates a student's total marks, average percentage, and assigns a grade based on marks entered for multiple subjects. It then displays these results.
 import java.util.Scanner;
 
 class Student {
