@@ -1,6 +1,10 @@
-//Java code for a simple ATM system with deposit, withdrawal, and balance check functionalities.
-
 import java.util.Scanner;
+
+interface ATMInterface {
+    void withdraw(double amount);
+    void deposit(double amount);
+    void checkBalance();
+}
 
 class BankAccount {
     private double balance;
@@ -11,7 +15,7 @@ class BankAccount {
 
     public void deposit(double amount) {
         balance += amount;
-        System.out.println("Deposited " + amount + ". New balance: " + balance);
+        System.out.println("Deposit of " + amount + " successful. New balance: " + balance);
     }
 
     public void withdraw(double amount) {
@@ -19,39 +23,33 @@ class BankAccount {
             System.out.println("Insufficient funds");
         } else {
             balance -= amount;
-            System.out.println("Withdrew " + amount + ". New balance: " + balance);
+            System.out.println("Withdrawal of " + amount + " successful. New balance: " + balance);
         }
     }
 
     public void checkBalance() {
-        System.out.println("Current balance: " + balance);
+        System.out.println("Your current balance is: " + balance);
     }
 }
 
-class ATM 
-{
+class ATM implements ATMInterface {
     private BankAccount account;
 
     public ATM(BankAccount account) {
         this.account = account;
     }
 
-    public void deposit(double amount) {
-        if (amount <= 0) {
-            System.out.println("Invalid amount");
-        } else {
-            account.deposit(amount);
-        }
-    }
-
+    @Override
     public void withdraw(double amount) {
-        if (amount <= 0) {
-            System.out.println("Invalid amount");
-        } else {
-            account.withdraw(amount);
-        }
+        account.withdraw(amount);
     }
 
+    @Override
+    public void deposit(double amount) {
+        account.deposit(amount);
+    }
+
+    @Override
     public void checkBalance() {
         account.checkBalance();
     }
@@ -59,26 +57,28 @@ class ATM
 
 public class Main {
     public static void main(String[] args) {
-        BankAccount bankAccount = new BankAccount(2000);
-        ATM atm = new ATM(bankAccount);
+        BankAccount account = new BankAccount(1000);
+        ATM atm = new ATM(account);
+
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
+            System.out.println("Choose an option:");
             System.out.println("1. Deposit");
             System.out.println("2. Withdraw");
             System.out.println("3. Check Balance");
             System.out.println("4. Exit");
-            System.out.print("Choose an option: ");
-            int option = scanner.nextInt();
 
-            switch (option) {
+            int choice = scanner.nextInt();
+
+            switch (choice) {
                 case 1:
-                    System.out.print("Enter amount to deposit: ");
+                    System.out.println("Enter deposit amount:");
                     double depositAmount = scanner.nextDouble();
                     atm.deposit(depositAmount);
                     break;
                 case 2:
-                    System.out.print("Enter amount to withdraw: ");
+                    System.out.println("Enter withdrawal amount:");
                     double withdrawAmount = scanner.nextDouble();
                     atm.withdraw(withdrawAmount);
                     break;
@@ -87,16 +87,11 @@ public class Main {
                     break;
                 case 4:
                     System.out.println("Exiting...");
+                    scanner.close();
                     System.exit(0);
-                    break;
                 default:
-                    System.out.println("Invalid option");
+                    System.out.println("Invalid choice. Please enter again.");
             }
         }
     }
 }
-
-
-
-
-
