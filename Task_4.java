@@ -3,22 +3,22 @@ import java.util.*;
 
 public class CurrencyConverterApp {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
 
         try {
             // Step 1: Currency Selection
             System.out.println("Enter the base currency:");
-            String baseCurrency = scanner.nextLine().toUpperCase();
+            String baseCurrency = sc.nextLine().toUpperCase();
 
             System.out.println("Enter the target currency:");
-            String targetCurrency = scanner.nextLine().toUpperCase();
+            String targetCurrency = sc.nextLine().toUpperCase();
 
             // Create a CurrencyConverter object
             CurrencyConverter converter = new CurrencyConverter(baseCurrency, targetCurrency);
 
             // Step 3: Amount Input
             System.out.println("Enter the amount to convert from " + baseCurrency + " to " + targetCurrency + ":");
-            double amount = scanner.nextDouble();
+            double amount = sc.nextDouble();
 
             // Step 4: Currency Conversion
             double convertedAmount = converter.convert(amount);
@@ -27,9 +27,7 @@ public class CurrencyConverterApp {
             System.out.println("Converted amount: " + convertedAmount + " " + targetCurrency);
         } catch (InputMismatchException e) {
             System.out.println("Invalid input. Please enter a valid number.");
-        } finally {
-            scanner.close();
-        }
+        } 
     }
 }
 
